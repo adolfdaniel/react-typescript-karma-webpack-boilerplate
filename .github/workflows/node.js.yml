@@ -24,6 +24,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - name: GitHub Action for NPM/Chrome
+      uses: daleobrien/npm-with-chrome-browser-action@v1.0.1
     - name: Install dependencies
       run: yarn
     - name: Build Project

@@ -24,6 +24,8 @@ module.exports = options => {
      */
     devtool: 'inline-source-map',
 
+    mode: 'development',
+
     /**
      * Options affecting the resolving of modules.
      *
@@ -41,7 +43,7 @@ module.exports = options => {
       /**
        * Make sure root is src
        */
-      modules: [ resolve(__dirname, 'src'), 'node_modules' ]
+      modules: [resolve(__dirname, 'src'), 'node_modules']
 
     },
 
@@ -61,8 +63,8 @@ module.exports = options => {
          */
         {
           enforce: 'pre',
-          test: /\.tsx$/,
-          loader: 'tslint-loader',
+          test: /\.tsx?$/,
+          loader: 'eslint-loader',
           exclude: [helpers.root('node_modules')]
         },
 
@@ -113,7 +115,10 @@ module.exports = options => {
         {
           test: /\.json$/,
           loader: 'json-loader',
-          exclude: [helpers.root('src/index.html')]
+          exclude: [
+            helpers.root('src/index.html'),
+            /node_modules/
+          ]
         },
 
         // /**
@@ -175,11 +180,11 @@ module.exports = options => {
     },
 
     externals: {
-        'jsdom': 'window',
-        'cheerio': 'window',
-        'react/lib/ExecutionEnvironment': 'true',
-        'react/addons': 'true',
-        'react/lib/ReactContext': 'window'
+      'jsdom': 'window',
+      'cheerio': 'window',
+      'react/lib/ExecutionEnvironment': 'true',
+      'react/addons': 'true',
+      'react/lib/ReactContext': 'window'
     }
 
   };

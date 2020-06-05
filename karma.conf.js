@@ -1,5 +1,5 @@
 const { resolve } = require('path');
-const testWebpackConfig = require('./config/webpack.test.js')({env: 'test'});
+const testWebpackConfig = require('./config/webpack.test.js')({ env: 'test' });
 
 module.exports = config => {
     config.set({
@@ -8,22 +8,24 @@ module.exports = config => {
         frameworks: ['jasmine'],
 
         files: [
-            { pattern: 'test/**/*.tsx' }
+            { pattern: 'src/**/*.spec.ts' },
+            { pattern: 'src/**/*.spec.tsx' }
         ],
 
         preprocessors: {
             // add webpack as preprocessor
             'src/**/*.tsx': ['sourcemap'],
-            'test/**/*.tsx': ['webpack', 'sourcemap']
+            'src/**/*.spec.ts': ['webpack', 'sourcemap'],
+            'src/**/*.spec.tsx': ['webpack', 'sourcemap']
         },
 
         webpack: testWebpackConfig,
 
         coverageReporter: {
-            reporters:[
+            reporters: [
                 //{type: 'html', dir:'coverage/'},  // https://github.com/karma-runner/karma-coverage/issues/123
-                {type: 'text'},
-                {type: 'text-summary'}
+                { type: 'text' },
+                { type: 'text-summary' }
             ],
         },
 

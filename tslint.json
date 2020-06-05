@@ -1,7 +1,0 @@
-{
-  "extends": ["tslint:latest", "tslint-react"],
-  "rules": {
-    // enable tslint-react rules here
-    "jsx-no-lambda": true
-  }
-}

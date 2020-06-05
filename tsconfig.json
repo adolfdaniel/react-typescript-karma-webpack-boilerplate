@@ -6,7 +6,8 @@
         "module": "commonjs",
         "target": "es6",
         "jsx": "react",
-        "inlineSourceMap": true
+        "inlineSourceMap": true,
+        "baseUrl": "src"
     },
     "exclude": [
         "node_modules"

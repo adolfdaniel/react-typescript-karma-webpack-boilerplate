@@ -1,14 +1,21 @@
-import * as React from "react";
+import * as React from 'react';
+import { string } from 'prop-types';
 
 interface IHelloProps { compiler: string; framework: string; }
 
-const Hello: React.StatelessComponent<IHelloProps> = ({compiler, framework}) => (
-  <h1>Hello from {compiler} and {framework}!</h1>
+const Hello: React.StatelessComponent<IHelloProps> = ({ compiler, framework }) => (
+  <h1>
+    <span>Hello from </span>
+    {compiler}
+    <span> and </span>
+    {framework}
+    !
+  </h1>
 );
 
 Hello.propTypes = {
-  compiler: React.PropTypes.string.isRequired,
-  framework: React.PropTypes.string.isRequired,
+  compiler: string.isRequired,
+  framework: string.isRequired,
 };
 
 export default Hello;

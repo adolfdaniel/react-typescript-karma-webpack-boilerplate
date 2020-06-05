@@ -1,5 +1,6 @@
 const { resolve } = require('path');
 const { getIfUtils } = require('webpack-config-utils');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = env => {
     const { ifProd, ifNotProd } = getIfUtils(env);
@@ -9,10 +10,14 @@ module.exports = env => {
         output: {
             filename: "bundle.js",
             path: resolve("dist"),
-            publicPath: "/dist/",
             pathinfo: ifNotProd(),
         },
         devtool: ifProd("source-map", "eval"),
+        optimization: {
+            splitChunks: {
+                chunks: 'all',
+            },
+        },
         resolve: {
 
             /*
@@ -29,7 +34,7 @@ module.exports = env => {
         module: {
             rules: [
                 {
-                    test: /\.tsx$/,
+                    test: /\.ts(x)?$/,
                     loaders: [
                         'awesome-typescript-loader'
                     ],
@@ -38,26 +43,25 @@ module.exports = env => {
                 {
                     test: /\.js$/,
                     enforce: "pre",
-                    loader: "source-map-loader" 
+                    loader: "source-map-loader"
                 },
                 {
-                    test: /\.tsx$/,
+                    test: /\.ts(x)?$/,
                     enforce: "pre",
-                    loader: 'tslint-loader',
-                    exclude: /node_modules/, 
+                    loader: 'eslint-loader',
+                    exclude: /node_modules/,
                 }
             ],
 
         },
-        externals: {
-            "react": "React",
-            "react-dom": "ReactDOM"
-        },
+        plugins: [new HtmlWebpackPlugin({
+            template: 'index.html'
+        })]
     };
-  if (env.debug) {
-    console.log(config);
-    debugger; // tslint disable line
-  }
+    if (env.debug) {
+        console.log(config);
+        debugger; // tslint disable line
+    }
 
-  return config;
+    return config;
 }

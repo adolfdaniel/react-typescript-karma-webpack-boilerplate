@@ -33,4 +33,5 @@ jobs:
     - name: Codecov
       uses: codecov/codecov-action@v1.0.7
       with:
+        token: 25ccfd3d-e7e7-4d2b-a595-2291716031b4
         file: ./cobertura-coverage.xml

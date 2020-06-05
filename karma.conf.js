@@ -23,7 +23,7 @@ module.exports = config => {
 
         coverageReporter: {
             reporters: [
-                //{type: 'html', dir:'coverage/'},  // https://github.com/karma-runner/karma-coverage/issues/123
+                { type: 'cobertura', dir: 'coverage', subdir: '.' },
                 { type: 'text' },
                 { type: 'text-summary' }
             ],
@@ -57,29 +57,3 @@ module.exports = config => {
         singleRun: false,
     });
 };
-
-// old config
-// coverageReporter: {
-//     dir: 'coverage',
-//     reporters: [
-//         { type: 'text-summary' },
-//         {
-//         type: 'json',
-//         subdir: '.',
-//         file: 'coverage-final.json'
-//         }
-//     ]
-// },
-
-// remapIstanbulReporter: {
-//     src: 'coverage/coverage-final.json',
-//     reports: {
-//         lcovonly: 'coverage/lcov.info',
-//         html: 'coverage/report'
-//     },
-//     timeoutNotCreated: 5000,
-//     timeoutNoMoreFiles: 1000
-// },
-
-
-// reporters: ['progress', 'coverage'], // 'karma-remap-istanbul' readd once fixed by github PRs

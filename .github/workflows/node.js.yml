@@ -29,9 +29,8 @@ jobs:
     - name: Build Project
       run: yarn build
     - name: Run Tests
-      run: yarn test
+      run: yarn test --browsers ChromeHeadless
     - name: Codecov
       uses: codecov/codecov-action@v1.0.7
       with:
         file: ./cobertura-coverage.xml
-

@@ -61,7 +61,7 @@
   },
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "webpack --env production --mode production -p",
+    "build": "webpack --env production --mode production",
     "prebuild:dev": "rimraf dist",
     "build:dev": "webpack --env development --mode development",
     "start": "http-server ./dist",

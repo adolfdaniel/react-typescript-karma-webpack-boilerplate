@@ -1,6 +1,6 @@
 # TypeScript React Karma Jasmine Webpack Boilerplate ![Node.js CI](https://github.com/adolfdaniel/react-typescript-karma-webpack-boilerplate/workflows/Node.js%20CI/badge.svg) [![codecov](https://codecov.io/gh/adolfdaniel/react-typescript-karma-webpack-boilerplate/branch/master/graph/badge.svg)](https://codecov.io/gh/adolfdaniel/react-typescript-karma-webpack-boilerplate)
 
-Boilerplate project for setting up Typescript and React with Webpack 4.0 and Karma with Jasmine and Enzyme for tests. This project also includes gitflow and code coverage.
+Boilerplate project for setting up Typescript 4.0 and React 17 with Webpack 5.0 and Karma with Jasmine and Enzyme for tests. This project also includes gitflow and code coverage.
 
 ## Installation
 

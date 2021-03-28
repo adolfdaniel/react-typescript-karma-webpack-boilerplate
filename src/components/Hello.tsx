@@ -3,7 +3,7 @@ import { string } from 'prop-types';
 
 interface IHelloProps { compiler: string; framework: string; }
 
-const Hello: React.StatelessComponent<IHelloProps> = ({ compiler, framework }) => (
+const Hello: React.FunctionComponent<IHelloProps> = ({ compiler, framework }) => (
   <h1>
     <span>Hello from </span>
     {compiler}

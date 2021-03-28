@@ -1,21 +1,21 @@
-'use strict'
+'use strict';
 
 const helpers = require('./helpers');
 const { resolve } = require('path');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 /**
  * Webpack Constants
  */
-const ENV = process.env.ENV = process.env.NODE_ENV = 'test';
+const ENV = (process.env.ENV = process.env.NODE_ENV = 'test');
 
 /**
  * Webpack configuration
  *
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
-module.exports = options => {
+module.exports = (options) => {
   return {
-
     /**
      * Source map for Karma from the help of karma-sourcemap-loader &  karma-webpack
      *
@@ -32,7 +32,6 @@ module.exports = options => {
      * See: http://webpack.github.io/docs/configuration.html#resolve
      */
     resolve: {
-
       /**
        * An array of extensions that should be used to resolve modules.
        *
@@ -43,9 +42,10 @@ module.exports = options => {
       /**
        * Make sure root is src
        */
-      modules: [resolve(__dirname, 'src'), 'node_modules']
-
+      modules: [resolve(__dirname, 'src'), 'node_modules'],
     },
+
+    plugins: [new ESLintPlugin()],
 
     /**
      * Options affecting the normal modules.
@@ -53,21 +53,7 @@ module.exports = options => {
      * See: http://webpack.github.io/docs/configuration.html#module
      */
     module: {
-
       rules: [
-
-        /**
-         * Tslint loader support for *.ts files
-         *
-         * See: https://github.com/wbuchwalter/tslint-loader
-         */
-        {
-          enforce: 'pre',
-          test: /\.tsx?$/,
-          loader: 'eslint-loader',
-          exclude: [helpers.root('node_modules')]
-        },
-
         /**
          * Source map loader support for *.js files
          * Extracts SourceMaps for source files that as added as sourceMappingURL comment.
@@ -81,7 +67,7 @@ module.exports = options => {
           exclude: [
             // these packages have problems with their sourcemaps
             helpers.root('node_modules/rxjs'),
-          ]
+          ],
         },
 
         /**
@@ -92,19 +78,17 @@ module.exports = options => {
         {
           test: /\.tsx$/,
           loader: 'awesome-typescript-loader',
-          query: {
-            // use inline sourcemaps for "karma-remap-coverage" reporter
+          options: {
+            // use inline sourcemaps for 'karma-remap-coverage' reporter
             sourceMap: false,
             inlineSourceMap: true,
             compilerOptions: {
-
               // Remove TypeScript helpers to be injected
               // below by DefinePlugin
-              removeComments: true
-
-            }
+              removeComments: true,
+            },
           },
-          exclude: [/\.e2e\.ts$/]
+          exclude: [/\.e2e\.ts$/],
         },
 
         /**
@@ -115,35 +99,8 @@ module.exports = options => {
         {
           test: /\.json$/,
           loader: 'json-loader',
-          exclude: [
-            helpers.root('src/index.html'),
-            /node_modules/
-          ]
+          exclude: [helpers.root('src/index.html'), /node_modules/],
         },
-
-        // /**
-        //  * Raw loader support for *.css files
-        //  * Returns file content as string
-        //  *
-        //  * See: https://github.com/webpack/raw-loader
-        //  */
-        // {
-        //   test: /\.css$/,
-        //   loaders: ['to-string-loader', 'css-loader'],
-        //   exclude: [helpers.root('src/index.html')]
-        // },
-
-        // /**
-        //  * Raw loader support for *.html
-        //  * Returns file content as string
-        //  *
-        //  * See: https://github.com/webpack/raw-loader
-        //  */
-        // {
-        //   test: /\.html$/,
-        //   loader: 'raw-loader',
-        //   exclude: [helpers.root('src/index.html')]
-        // },
 
         /**
          * Instruments JS files with Istanbul for subsequent code coverage reporting.
@@ -156,13 +113,9 @@ module.exports = options => {
           test: /\.(js|tsx)$/,
           loader: 'istanbul-instrumenter-loader',
           include: helpers.root('src'),
-          exclude: [
-            /\.(e2e|spec)\.tsx?$/,
-            /node_modules/
-          ]
-        }
-
-      ]
+          exclude: [/\.(e2e|spec)\.tsx?$/, /node_modules/],
+        },
+      ],
     },
 
     /**
@@ -173,19 +126,14 @@ module.exports = options => {
      */
     node: {
       global: true,
-      crypto: 'empty',
-      module: false,
-      clearImmediate: false,
-      setImmediate: false
     },
 
     externals: {
-      'jsdom': 'window',
-      'cheerio': 'window',
+      jsdom: 'window',
+      cheerio: 'window',
       'react/lib/ExecutionEnvironment': 'true',
       'react/addons': 'true',
-      'react/lib/ReactContext': 'window'
-    }
-
+      'react/lib/ReactContext': 'window',
+    },
   };
-}
+};
